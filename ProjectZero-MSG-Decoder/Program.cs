@@ -13,6 +13,8 @@ namespace ProjectZero_MSG_Decoder
     {
         static void Main(string[] args)
         {
+            //Tested on SLUS-20388
+            //Input: ProjectZero-MSG-Decoder.exe MSG.XLSX Archive_0 Archive_1 IMG_BD.BIN IMG_HD.BIN
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             if (args.Length > 0)
             {
@@ -69,8 +71,9 @@ namespace ProjectZero_MSG_Decoder
                 }
             }
 
-            /*string[] text0 = pzMsg.GetAllText();
-            string[] text1 = PZMsgDirectPointer.GetAllText(@"D:\Games\Fatal Frame\text0.msg", 4974);
+            /*PZMsg pzMsg = new PZMsg(@"D:\Games\Fatal Frame\Archive_0");
+            string[] text0 = pzMsg.GetAllText();
+            string[] text1 = PZMsgDirectPointer.GetAllText(@"D:\Games\Fatal Frame\Archive_1", 4974);
             XLSX.ExportXLSX(text0, text1, @"D:\Games\Fatal Frame\MSG.xlsx");*/
         }
 
