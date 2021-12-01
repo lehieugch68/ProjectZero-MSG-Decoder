@@ -179,6 +179,7 @@ namespace ProjectZero_MSG_Decoder
         {
             if (_AllBlocks == null) GetAllBlock();
             List<string> allText = new List<string>();
+            Console.WriteLine(_AllBlocks[_AllBlocks.Length - 1].PointerOffset);
             foreach (BlockText block in _AllBlocks)
             {
                 if (block.Messages == null)
@@ -201,7 +202,7 @@ namespace ProjectZero_MSG_Decoder
             }
             return allText.ToArray();
         }
-        public byte[] Rebuild(string[] lines, out long size)
+        public byte[] Rebuild(string[] lines, out long size, bool align = true)
         {
             int index = 0;
             if (_AllBlocks == null) GetAllBlock();
@@ -289,7 +290,7 @@ namespace ProjectZero_MSG_Decoder
                 writer.Write(block.PointerOffset);
             }
             size = writer.BaseStream.Length;
-            if (writer.BaseStream.Length % 0x800 != 0)
+            if (align && writer.BaseStream.Length % 0x800 != 0)
             {
                 int zeroesLen = 0x800 - ((int)writer.BaseStream.Length % 0x800);
                 writer.BaseStream.Position = writer.BaseStream.Length;
