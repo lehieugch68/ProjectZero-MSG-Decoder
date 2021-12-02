@@ -73,7 +73,8 @@ namespace ProjectZero_MSG_Decoder
             {
                 BinaryReader reader = new BinaryReader(stream);
                 reader.BaseStream.Seek(start, SeekOrigin.Begin);
-                int endPointerOffset = end == -1 ? (int)reader.BaseStream.Length : (int)end;
+                if (end == -1) end = (int)reader.BaseStream.Length;
+                int endPointerOffset = (int)end;
                 int blockCount = 0;
                 while (reader.BaseStream.Position < endPointerOffset)
                 {
@@ -100,16 +101,51 @@ namespace ProjectZero_MSG_Decoder
                         continue;
                     }
                     int endOffset = i >= blocksSorted.Length - 1 ? (int)end : blocksSorted[i + 1].PointerOffset;
-                    blocksSorted[i].Messages = GetBlockStrings(ref reader, blocksSorted[i], endOffset);
+                    blocksSorted[i].Messages = i >= blocksSorted.Length - 1 ? blocksSorted[i].Messages = GetBlockStringsDirectPointer(ref reader, blocksSorted[i], endOffset) :
+                        blocksSorted[i].Messages = GetBlockStrings(ref reader, blocksSorted[i], endOffset);
                 }
                 reader.Close();
                 return blocksSorted;
             }
         }
+        private long[] GetDirectPointers(ref BinaryReader reader, long startPointerOffset, long endPointerOffset)
+        {
+            int strCount = 0;
+            while (reader.BaseStream.Position < endPointerOffset)
+            {
+                int temp = reader.ReadInt32();
+                if (temp < endPointerOffset) endPointerOffset = temp;
+                strCount++;
+            }
+            reader.BaseStream.Seek(startPointerOffset, SeekOrigin.Begin);
+            long[] pointers = new long[strCount];
+            for (int i = 0; i < strCount; i++)
+            {
+                pointers[i] = reader.ReadInt32();
+            }
+            return pointers;
+        }
+        private PZMessage[] GetBlockStringsDirectPointer(ref BinaryReader reader, BlockText block, int endPointerOffset)
+        {
+            long[] pointers = GetDirectPointers(ref reader, block.PointerOffset, endPointerOffset);
+            List<PZMessage> messages = new List<PZMessage>();
+            for (int i = 0; i < pointers.Length; i++)
+            {
+                reader.BaseStream.Position = pointers[i];
+                long nextPointer = i >= pointers.Length - 1 ? reader.BaseStream.Length : pointers[i + 1];
+                int strLen = (int)(nextPointer - pointers[i]);
+                byte[] raw = reader.ReadBytes(strLen);
+                PZMessage msg = new PZMessage(i, (int)pointers[i]);
+                msg.Message = GameEncoding.GetString(raw);
+                messages.Add(msg);
+            }
+            return messages.ToArray();
+        }
         private BlockText[] GetBlocks(ref BinaryReader reader, long start = 0, long end = -1)
         {
             reader.BaseStream.Seek(start, SeekOrigin.Begin);
-            int endPointerOffset = end == -1 ? (int)reader.BaseStream.Length : (int)end;
+            if (end == -1) end = (int)reader.BaseStream.Length;
+            int endPointerOffset = (int)end;
             int blockCount = 0;
             while (reader.BaseStream.Position < endPointerOffset)
             {
@@ -179,7 +215,7 @@ namespace ProjectZero_MSG_Decoder
         {
             if (_AllBlocks == null) GetAllBlock();
             List<string> allText = new List<string>();
-            Console.WriteLine(_AllBlocks[_AllBlocks.Length - 1].PointerOffset);
+            //Console.WriteLine(_AllBlocks[_AllBlocks.Length - 1].PointerOffset);
             foreach (BlockText block in _AllBlocks)
             {
                 if (block.Messages == null)
@@ -262,6 +298,20 @@ namespace ProjectZero_MSG_Decoder
                         writer.Write(block.PointerOffset);
                     }
                     writer.BaseStream.Position = tempPos;
+                }
+                else if (i == _AllBlocks.Length - 1)
+                {
+                    _AllBlocks[i].PointerOffset = (int)writer.BaseStream.Position;
+                    writer.Write(new byte[_AllBlocks[i].Messages.Length * 4]);
+                    for (int x = 0; x < _AllBlocks[i].Messages.Length; x++)
+                    {
+                        _AllBlocks[i].Messages[x].PointerOffset = (int)writer.BaseStream.Position;
+                        byte[] msgBytes = GameEncoding.GetBytes(_AllBlocks[i].Messages[x].Message);
+                        writer.Write(msgBytes);
+                        writer.BaseStream.Position = _AllBlocks[i].PointerOffset + (x * 4);
+                        writer.Write(_AllBlocks[i].Messages[x].PointerOffset);
+                        writer.BaseStream.Position = writer.BaseStream.Length;
+                    }
                 }
                 else
                 {

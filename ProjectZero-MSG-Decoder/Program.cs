@@ -28,7 +28,7 @@ namespace ProjectZero_MSG_Decoder
                     for (int i = 2; i <= rows; i++)
                     {
                         if (worksheet.Cells[i, 2].Value != null && worksheet.Cells[i, 2].Value.ToString().Length > 0) text0.Add(worksheet.Cells[i, 2].Value.ToString());
-                        
+
                         else text0.Add(worksheet.Cells[i, 1].Value != null ? worksheet.Cells[i, 1].Value.ToString() : "");
                     }
                     ExcelWorksheet worksheet1 = package.Workbook.Worksheets["Archive_5"];
@@ -39,29 +39,11 @@ namespace ProjectZero_MSG_Decoder
                         if (worksheet1.Cells[i, 2].Value != null && worksheet1.Cells[i, 2].Value.ToString().Length > 0) text1.Add(worksheet1.Cells[i, 2].Value.ToString());
                         else text1.Add(worksheet1.Cells[i, 1].Value.ToString());
                     }
-                    ExcelWorksheet worksheet2 = package.Workbook.Worksheets["Subtitles"];
-                    rows = worksheet2.Dimension.Rows;
-                    List<string> sub = new List<string>();
-                    for (int i = 2; i <= rows; i++)
-                    {
-                        if (worksheet2.Cells[i, 2].Value != null && worksheet2.Cells[i, 2].Value.ToString().Length > 0) sub.Add(worksheet2.Cells[i, 2].Value.ToString());
-                        else sub.Add(worksheet2.Cells[i, 1].Value.ToString());
-                    }
-
-                    long text0Size, text1Size, subSize;
+                    
+                    long text0Size, text1Size;
 
                     PZMsg pzMsg = new PZMsg(args[1]);
-                    byte[] archive0Bytes = pzMsg.Rebuild(text0.ToArray(), out text0Size, false);
-                    byte[] subBytes = PZMsgDirectPointer.Repack(sub.ToArray(), args[1], out subSize, 125459);
-
-                    int total = archive0Bytes.Length + subBytes.Length;
-                    if (total % 0x800 != 0)
-                    {
-                        total += 0x800 - (total % 0x800);
-                    }
-                    byte[] archive0Total = new byte[total];
-                    Array.Copy(archive0Bytes, 0, archive0Total, 0, archive0Bytes.Length);
-                    Array.Copy(subBytes, 0, archive0Total, archive0Bytes.Length, subBytes.Length);
+                    byte[] archive0Bytes = pzMsg.Rebuild(text0.ToArray(), out text0Size, true);
 
                     byte[] archive1Bytes = PZMsgDirectPointer.Repack(text1.ToArray(), args[2], out text1Size, 4974);
 
@@ -73,7 +55,7 @@ namespace ProjectZero_MSG_Decoder
                         BinaryWriter writer = new BinaryWriter(stream);
                         writer.BaseStream.Position = writer.BaseStream.Length;
                         arc0Pos = writer.BaseStream.Position / 2048;
-                        writer.Write(archive0Total);
+                        writer.Write(archive0Bytes);
                         arc1Pos = writer.BaseStream.Position / 2048;
                         writer.Write(archive1Bytes);
                         writer.Close();
@@ -84,18 +66,18 @@ namespace ProjectZero_MSG_Decoder
                         BinaryWriter writer = new BinaryWriter(stream);
                         writer.BaseStream.Position = 320;
                         writer.Write((int)arc0Pos);
-                        writer.Write((int)(text0Size + subSize));
+                        writer.Write((int)text0Size);
                         writer.BaseStream.Position = 120;
                         writer.Write((int)arc1Pos);
                         writer.Write((int)text1Size);
                         writer.Close();
                     }
-                } 
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                 }
-                
+
             }
 
 
@@ -103,12 +85,13 @@ namespace ProjectZero_MSG_Decoder
             /*PZMsg pzMsg = new PZMsg(@"D:\VietHoaGame\Fatal Frame\Unpack\30");
             string[] text0 = pzMsg.GetAllText();
 
+
             string[] sub = PZMsgDirectPointer.GetAllText(@"D:\VietHoaGame\Fatal Frame\Unpack\30", 125459);
 
-            string[] text1 = PZMsgDirectPointer.GetAllText(@"D:\VietHoaGame\Fatal Frame\Unpack\5", 4970);
-            XLSX.ExportXLSX(text0, text1, sub, @"D:\VietHoaGame\Fatal Frame\Fatal Frame PS2.xlsx");
+            string[] text1 = PZMsgDirectPointer.GetAllText(@"D:\VietHoaGame\Fatal Frame\Unpack\5", 4970);*/
+            //XLSX.ExportXLSX(text0, text1, @"D:\VietHoaGame\Fatal Frame\Fatal Frame PS2.xlsx");
 
-            Console.ReadKey();*/
+            //Console.ReadKey();
         }
 
     }

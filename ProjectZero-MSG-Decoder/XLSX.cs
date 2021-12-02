@@ -11,7 +11,7 @@ namespace ProjectZero_MSG_Decoder
 {
     public static class XLSX
     {
-        public static void ExportXLSX(string[] text0, string[] text1, string[] sub, string file)
+        public static void ExportXLSX(string[] text0, string[] text1, string file)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
@@ -49,23 +49,6 @@ namespace ProjectZero_MSG_Decoder
             }
             workSheet1.Column(1).AutoFit();
             workSheet1.Column(2).AutoFit();
-
-            var workSheet2 = excel.Workbook.Worksheets.Add("Subtitles");
-            workSheet2.Cells.Style.WrapText = true;
-            workSheet2.DefaultRowHeight = 12;
-            workSheet2.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            workSheet2.Cells[1, 1].Value = "English";
-            workSheet2.Cells[1, 2].Value = "Translation";
-            recordIndex = 2;
-
-            foreach (var row in sub)
-            {
-                workSheet2.Cells[recordIndex, 1].Value = row;
-                workSheet2.Cells[recordIndex, 2].Value = "";
-                recordIndex++;
-            }
-            workSheet2.Column(1).AutoFit();
-            workSheet2.Column(2).AutoFit();
 
             File.WriteAllBytes(file, excel.GetAsByteArray());
         }
