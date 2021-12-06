@@ -45,7 +45,8 @@ namespace ProjectZero_MSG_Decoder
                     PZMsg pzMsg = new PZMsg(args[1]);
                     byte[] archive0Bytes = pzMsg.Rebuild(text0.ToArray(), out text0Size, true);
 
-                    byte[] archive1Bytes = PZMsgDirectPointer.Repack(text1.ToArray(), args[2], out text1Size, 4974);
+                    byte[] archive1Bytes = PZMsgDirectPointer.Repack(text1.ToArray(), args[2], out text1Size, 4970
+                        );
 
                     long arc0Pos, arc1Pos;
 
