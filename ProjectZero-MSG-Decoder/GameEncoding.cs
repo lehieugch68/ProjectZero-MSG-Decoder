@@ -67,7 +67,7 @@ namespace ProjectZero_MSG_Decoder
             _CustomEncoding.Add(0x32, "x");
             _CustomEncoding.Add(0x33, "y");
             _CustomEncoding.Add(0x34, "z");
-            /*_CustomEncoding.Add(0x35, "０");
+            _CustomEncoding.Add(0x35, "０");
             _CustomEncoding.Add(0x36, "１");
             _CustomEncoding.Add(0x37, "２");
             _CustomEncoding.Add(0x38, "３");
@@ -76,7 +76,7 @@ namespace ProjectZero_MSG_Decoder
             _CustomEncoding.Add(0x3B, "６");
             _CustomEncoding.Add(0x3C, "７");
             _CustomEncoding.Add(0x3D, "８");
-            _CustomEncoding.Add(0x3E, "９");*/
+            _CustomEncoding.Add(0x3E, "９");
             _CustomEncoding.Add(0x3F, "0");
             _CustomEncoding.Add(0x40, "1");
             _CustomEncoding.Add(0x41, "2");
@@ -95,8 +95,8 @@ namespace ProjectZero_MSG_Decoder
             _CustomEncoding.Add(0x8E, "-");
             _CustomEncoding.Add(0x8F, "?");
             _CustomEncoding.Add(0x90, "/");
-            _CustomEncoding.Add(0x91, "’");
-            _CustomEncoding.Add(0x92, "、");
+            /*_CustomEncoding.Add(0x91, "’");
+            _CustomEncoding.Add(0x92, "、");*/
             _CustomEncoding.Add(0x93, ";");
             _CustomEncoding.Add(0x94, ":");
             _CustomEncoding.Add(0x95, ",");
@@ -131,16 +131,19 @@ namespace ProjectZero_MSG_Decoder
 
             _VietnameseEncoding = new Dictionary<string, string>();
 
-            _VietnameseEncoding.Add("{53}", "ớ");
-            _VietnameseEncoding.Add("{54}", "ờ");
-            _VietnameseEncoding.Add("{55}", "ở");
-            _VietnameseEncoding.Add("{56}", "ỡ");
-            _VietnameseEncoding.Add("{57}", "ợ");
-            _VietnameseEncoding.Add("{58}", "ủ");
-            _VietnameseEncoding.Add("{59}", "ũ");
-            _VietnameseEncoding.Add("{60}", "ụ");
-            _VietnameseEncoding.Add("{61}", "ư");
-            _VietnameseEncoding.Add("{62}", "ứ");
+            _VietnameseEncoding.Add("{145}", "ớ");
+            _VietnameseEncoding.Add("{146}", "ờ");
+            _VietnameseEncoding.Add("{152}", "ở");
+            _VietnameseEncoding.Add("{153}", "ỡ");
+            _VietnameseEncoding.Add("{157}", "ợ");
+            _VietnameseEncoding.Add("{158}", "ủ");
+            _VietnameseEncoding.Add("{159}", "ũ");
+            _VietnameseEncoding.Add("{162}", "ụ");
+            _VietnameseEncoding.Add("{164}", "ư");
+            _VietnameseEncoding.Add("{180}", "ứ");
+            _VietnameseEncoding.Add("{181}", "Ô");
+            _VietnameseEncoding.Add("{182}", "Ố");
+            _VietnameseEncoding.Add("{183}", "ỷ");
 
             _VietnameseEncoding.Add("{73}", "đ");
             _VietnameseEncoding.Add("{74}", "ừ");
@@ -201,86 +204,6 @@ namespace ProjectZero_MSG_Decoder
             _VietnameseEncoding.Add("{129}", "ộ");
             _VietnameseEncoding.Add("{130}", "ơ");
             _VietnameseEncoding.Add("{131}", "â");
-
-            /*_VietnameseEncoding.Add("{73}", "á");
-            _VietnameseEncoding.Add("{74}", "à");
-            _VietnameseEncoding.Add("{75}", "ả");
-            _VietnameseEncoding.Add("{76}", "ã");
-            _VietnameseEncoding.Add("{77}", "ạ");
-            _VietnameseEncoding.Add("{78}", "â");
-            _VietnameseEncoding.Add("{79}", "ấ");
-            _VietnameseEncoding.Add("{80}", "ầ");
-            _VietnameseEncoding.Add("{81}", "ẩ");
-            _VietnameseEncoding.Add("{82}", "ẫ");
-            _VietnameseEncoding.Add("{83}", "ậ");
-            _VietnameseEncoding.Add("{84}", "ă");
-            _VietnameseEncoding.Add("{85}", "ắ");
-            _VietnameseEncoding.Add("{86}", "ằ");
-            _VietnameseEncoding.Add("{87}", "ẳ");
-            _VietnameseEncoding.Add("{88}", "ẵ");
-            _VietnameseEncoding.Add("{89}", "ặ");
-            
-            _VietnameseEncoding.Add("{91}", "é");
-            _VietnameseEncoding.Add("{92}", "è");
-            _VietnameseEncoding.Add("{93}", "ẻ");
-            _VietnameseEncoding.Add("{94}", "ẽ");
-            _VietnameseEncoding.Add("{95}", "ẹ");
-            _VietnameseEncoding.Add("{96}", "ê");
-            _VietnameseEncoding.Add("{97}", "ế");
-            _VietnameseEncoding.Add("{98}", "ề");
-            _VietnameseEncoding.Add("{99}", "ể");
-            _VietnameseEncoding.Add("{100}", "ễ");
-            _VietnameseEncoding.Add("{101}", "ệ");
-            _VietnameseEncoding.Add("{102}", "í");
-            _VietnameseEncoding.Add("{103}", "ì");
-            _VietnameseEncoding.Add("{104}", "ỉ");
-            _VietnameseEncoding.Add("{105}", "ĩ");
-            _VietnameseEncoding.Add("{106}", "ị");
-            _VietnameseEncoding.Add("{107}", "ó");
-            _VietnameseEncoding.Add("{108}", "ò");
-            _VietnameseEncoding.Add("{109}", "ỏ");
-            _VietnameseEncoding.Add("{110}", "õ");
-            _VietnameseEncoding.Add("{111}", "ọ");
-            _VietnameseEncoding.Add("{112}", "ô");
-            _VietnameseEncoding.Add("{113}", "ố");
-            _VietnameseEncoding.Add("{114}", "ồ");
-            _VietnameseEncoding.Add("{115}", "ổ");
-            _VietnameseEncoding.Add("{116}", "ỗ");
-            _VietnameseEncoding.Add("{117}", "ộ");
-            _VietnameseEncoding.Add("{118}", "ơ");
-            _VietnameseEncoding.Add("{119}", "ớ");
-            _VietnameseEncoding.Add("{120}", "ờ");
-            _VietnameseEncoding.Add("{121}", "ở");
-            _VietnameseEncoding.Add("{122}", "ỡ");
-            _VietnameseEncoding.Add("{123}", "ợ");
-            _VietnameseEncoding.Add("{124}", "ú");
-            _VietnameseEncoding.Add("{125}", "ù");
-            _VietnameseEncoding.Add("{126}", "ủ");
-            _VietnameseEncoding.Add("{127}", "ũ");
-            _VietnameseEncoding.Add("{128}", "ụ");
-            _VietnameseEncoding.Add("{129}", "ư");
-            _VietnameseEncoding.Add("{130}", "ứ");
-            _VietnameseEncoding.Add("{131}", "ừ");
-            _VietnameseEncoding.Add("{132}", "ử");
-            _VietnameseEncoding.Add("{133}", "ữ");
-            _VietnameseEncoding.Add("{134}", "ự");
-            _VietnameseEncoding.Add("{135}", "ý");
-            _VietnameseEncoding.Add("{136}", "ỳ");
-            _VietnameseEncoding.Add("{137}", "ỷ");
-            _VietnameseEncoding.Add("{138}", "ỹ");
-            _VietnameseEncoding.Add("{139}", "ỵ");
-            _VietnameseEncoding.Add("{140}", "Á");
-            _VietnameseEncoding.Add("{141}", "À");
-            _VietnameseEncoding.Add("{142}", "Ả");
-            _VietnameseEncoding.Add("{143}", "Ã");
-            _VietnameseEncoding.Add("{144}", "Ạ");
-            _VietnameseEncoding.Add("{145}", "Đ");
-            _VietnameseEncoding.Add("{146}", "Ơ");
-            _VietnameseEncoding.Add("{147}", "Ớ");
-            _VietnameseEncoding.Add("{148}", "Ờ");
-            _VietnameseEncoding.Add("{149}", "Ở");
-            _VietnameseEncoding.Add("{150}", "Ỡ");
-            _VietnameseEncoding.Add("{151}", "Ợ");*/
         }
         public static Dictionary<byte, string> GetEncoding()
         {
