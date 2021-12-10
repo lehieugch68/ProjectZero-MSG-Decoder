@@ -200,7 +200,11 @@ namespace ProjectZero_MSG_Decoder
                 reader.BaseStream.Seek(msgsSorted[i].PointerOffset, SeekOrigin.Begin);
                 byte[] raw = reader.ReadBytes(strLen);
                 msgsSorted[i].Message = GameEncoding.GetString(raw);
-                //Console.WriteLine(msgsSorted[i].Message);
+                /*if (msgsSorted[i].PointerOffset == 3417)
+                {
+                    Console.WriteLine(msgsSorted[i].Message);
+                }*/
+                Console.WriteLine(msgsSorted[i].PointerOffset);
 
             }
             block.Messages = msgsSorted;
@@ -316,6 +320,13 @@ namespace ProjectZero_MSG_Decoder
                 else
                 {
                     _AllBlocks[i].PointerOffset = (int)writer.BaseStream.Position;
+                    /*if (_AllBlocks[i].PointerOffset == 3417)
+                    {
+                        foreach (PZMessage entry in _AllBlocks[i].Messages)
+                        {
+                            Console.WriteLine(entry.Message);
+                        }
+                    }*/
                     writer.Write(new byte[_AllBlocks[i].Messages.Length * 4]);
                     for (int x = 0; x < _AllBlocks[i].Messages.Length; x++)
                     {

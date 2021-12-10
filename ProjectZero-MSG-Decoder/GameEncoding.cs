@@ -88,6 +88,65 @@ namespace ProjectZero_MSG_Decoder
             _CustomEncoding.Add(0x47, "8");
             _CustomEncoding.Add(0x48, "9");
 
+            /*_CustomEncoding.Add(0x4A, "À");
+            _CustomEncoding.Add(0x4B, "Â");
+            _CustomEncoding.Add(0x4C, "Ç");
+            _CustomEncoding.Add(0x4D, "È");
+            _CustomEncoding.Add(0x4E, "É");
+            _CustomEncoding.Add(0x4F, "Ê");
+            _CustomEncoding.Add(0x50, "Î");
+            _CustomEncoding.Add(0x51, "Ô");
+            _CustomEncoding.Add(0x52, "à");
+            _CustomEncoding.Add(0x53, "è");
+            _CustomEncoding.Add(0x54, "é");
+            _CustomEncoding.Add(0x55, "ê");
+            _CustomEncoding.Add(0x56, "î");
+            _CustomEncoding.Add(0x57, "ô");
+            _CustomEncoding.Add(0x58, "ù");
+            _CustomEncoding.Add(0x59, "û");
+            _CustomEncoding.Add(0x5A, "Ä");
+            _CustomEncoding.Add(0x5B, "ß");
+            _CustomEncoding.Add(0x5C, "Ë");
+            _CustomEncoding.Add(0x5D, "Ï");
+            _CustomEncoding.Add(0x5E, "Ö");
+            _CustomEncoding.Add(0x5F, "Ü");
+            _CustomEncoding.Add(0x60, "ä");
+            _CustomEncoding.Add(0x61, "ë");
+            _CustomEncoding.Add(0x62, "ï");
+            _CustomEncoding.Add(0x63, "ü");
+            _CustomEncoding.Add(0x64, "¡");
+            _CustomEncoding.Add(0x65, "¿");
+            _CustomEncoding.Add(0x66, "Á");
+            _CustomEncoding.Add(0x67, "É");
+            _CustomEncoding.Add(0x68, "Í");
+            _CustomEncoding.Add(0x69, "Ñ");
+            _CustomEncoding.Add(0x6A, "Ó");
+            _CustomEncoding.Add(0x6B, "Ú");
+            _CustomEncoding.Add(0x6C, "á");
+            _CustomEncoding.Add(0x6D, "é");
+            _CustomEncoding.Add(0x6E, "í");
+            _CustomEncoding.Add(0x6F, "ñ");
+            _CustomEncoding.Add(0x70, "ó");
+            _CustomEncoding.Add(0x71, "ú");
+            _CustomEncoding.Add(0x72, "À");
+            _CustomEncoding.Add(0x73, "È");
+            _CustomEncoding.Add(0x74, "É");
+            _CustomEncoding.Add(0x75, "Ì");
+            _CustomEncoding.Add(0x76, "Ò");
+            _CustomEncoding.Add(0x77, "Ù");
+            _CustomEncoding.Add(0x78, "à");
+            _CustomEncoding.Add(0x79, "è");
+            _CustomEncoding.Add(0x7A, "é");
+            _CustomEncoding.Add(0x7B, "ì");
+            _CustomEncoding.Add(0x7C, "ò");
+            _CustomEncoding.Add(0x7D, "ù");
+            _CustomEncoding.Add(0x7E, "Ë");
+            _CustomEncoding.Add(0x7F, "Ï");
+            _CustomEncoding.Add(0x9D, "â");
+            _CustomEncoding.Add(0x9E, "ç");
+            _CustomEncoding.Add(0xA4, "ö");
+            _CustomEncoding.Add(0xB4, "œ");*/
+
             _CustomEncoding.Add(0x8A, "\"");
             _CustomEncoding.Add(0x8B, "'");
             _CustomEncoding.Add(0x8C, "(");
@@ -95,8 +154,10 @@ namespace ProjectZero_MSG_Decoder
             _CustomEncoding.Add(0x8E, "-");
             _CustomEncoding.Add(0x8F, "?");
             _CustomEncoding.Add(0x90, "/");
-            /*_CustomEncoding.Add(0x91, "’");
-            _CustomEncoding.Add(0x92, "、");*/
+
+            _CustomEncoding.Add(0x91, "’");
+            _CustomEncoding.Add(0x92, "、");
+
             _CustomEncoding.Add(0x93, ";");
             _CustomEncoding.Add(0x94, ":");
             _CustomEncoding.Add(0x95, ",");
@@ -131,7 +192,7 @@ namespace ProjectZero_MSG_Decoder
 
             _VietnameseEncoding = new Dictionary<string, string>();
 
-            _VietnameseEncoding.Add("{145}", "ớ");
+            /*_VietnameseEncoding.Add("{145}", "ớ");
             _VietnameseEncoding.Add("{146}", "ờ");
             _VietnameseEncoding.Add("{152}", "ở");
             _VietnameseEncoding.Add("{153}", "ỡ");
@@ -203,7 +264,7 @@ namespace ProjectZero_MSG_Decoder
             _VietnameseEncoding.Add("{128}", "ỗ");
             _VietnameseEncoding.Add("{129}", "ộ");
             _VietnameseEncoding.Add("{130}", "ơ");
-            _VietnameseEncoding.Add("{131}", "â");
+            _VietnameseEncoding.Add("{131}", "â");*/
         }
         public static Dictionary<byte, string> GetEncoding()
         {
