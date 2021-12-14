@@ -192,7 +192,7 @@ namespace ProjectZero_MSG_Decoder
 
             _VietnameseEncoding = new Dictionary<string, string>();
 
-            /*_VietnameseEncoding.Add("{145}", "ớ");
+            _VietnameseEncoding.Add("{145}", "ớ");
             _VietnameseEncoding.Add("{146}", "ờ");
             _VietnameseEncoding.Add("{152}", "ở");
             _VietnameseEncoding.Add("{153}", "ỡ");
@@ -264,7 +264,7 @@ namespace ProjectZero_MSG_Decoder
             _VietnameseEncoding.Add("{128}", "ỗ");
             _VietnameseEncoding.Add("{129}", "ộ");
             _VietnameseEncoding.Add("{130}", "ơ");
-            _VietnameseEncoding.Add("{131}", "â");*/
+            _VietnameseEncoding.Add("{131}", "â");
         }
         public static Dictionary<byte, string> GetEncoding()
         {

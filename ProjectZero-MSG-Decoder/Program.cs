@@ -23,8 +23,7 @@ namespace ProjectZero_MSG_Decoder
                     FileInfo fileInfo = new FileInfo(args[0]);
                     ExcelPackage package = new ExcelPackage(fileInfo);
                     ExcelWorksheet worksheet = package.Workbook.Worksheets["Archive_30"];
-                    //int rows = worksheet.Dimension.Rows;
-                    int rows = 3157;
+                    int rows = worksheet.Dimension.Rows;
                     List<string> text0 = new List<string>();
                     for (int i = 2; i <= rows; i++)
                     {
